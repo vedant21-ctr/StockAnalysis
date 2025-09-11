@@ -60,11 +60,25 @@ A comprehensive, enterprise-level inventory management solution with predictive 
 
 ## 📦 **Quick Start**
 
-### Option 1: Demo Mode (No Database)
+### Option 1: Quick Setup (Automated)
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/advanced-inventory-management.git
-cd advanced-inventory-management
+git clone https://github.com/vedant21-ctr/StockAnalysis.git
+cd StockAnalysis
+
+# Run automated setup
+chmod +x scripts/setup.sh
+./scripts/setup.sh
+
+# Start demo (uses mock data)
+cd client && npm start
+```
+
+### Option 2: Manual Setup (Demo Mode)
+```bash
+# Clone the repository
+git clone https://github.com/vedant21-ctr/StockAnalysis.git
+cd StockAnalysis
 
 # Install dependencies
 npm install
@@ -74,7 +88,7 @@ cd client && npm install && cd ..
 cd client && npm start
 ```
 
-### Option 2: Full Setup (With Database)
+### Option 3: Full Setup (With Database)
 ```bash
 # Install dependencies
 npm install
