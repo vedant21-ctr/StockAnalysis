@@ -1,71 +1,62 @@
-const mysql = require('mysql2/promise');
+// Mock database for API-only deployment
+// No MySQL dependency required
 
-const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'inventory_management',
-  port: process.env.DB_PORT || 3306,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-  acquireTimeout: 60000,
-  timeout: 60000,
-  reconnect: true
+// Mock database for API-only deployment
+const mockDatabase = {
+  connected: true,
+  data: new Map()
 };
 
-// Create connection pool
-const pool = mysql.createPool(dbConfig);
-
-// Test connection
+// Test connection (mock)
 const testConnection = async () => {
   try {
-    const connection = await pool.getConnection();
-    console.log('Database connected successfully');
-    connection.release();
+    console.log('✅ Mock database connected successfully');
+    return true;
   } catch (error) {
-    console.error('Database connection failed:', error.message);
-    process.exit(1);
+    console.error('❌ Mock database connection failed:', error.message);
+    return false;
   }
 };
 
-// Execute query helper
+// Mock query execution
 const executeQuery = async (query, params = []) => {
   try {
-    const [results] = await pool.execute(query, params);
-    return results;
+    // Simulate database delay
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
+    // Return mock results based on query type
+    if (query.includes('SELECT')) {
+      return []; // Mock empty results
+    } else if (query.includes('INSERT')) {
+      return { insertId: Math.floor(Math.random() * 1000) + 1, affectedRows: 1 };
+    } else if (query.includes('UPDATE') || query.includes('DELETE')) {
+      return { affectedRows: 1 };
+    }
+    
+    return [];
   } catch (error) {
-    console.error('Query execution error:', error.message);
+    console.error('Mock query execution error:', error.message);
     throw error;
   }
 };
 
-// Transaction helper
+// Mock transaction helper
 const executeTransaction = async (queries) => {
-  const connection = await pool.getConnection();
   try {
-    await connection.beginTransaction();
-    
     const results = [];
     for (const { query, params } of queries) {
-      const [result] = await connection.execute(query, params);
+      const result = await executeQuery(query, params);
       results.push(result);
     }
-    
-    await connection.commit();
     return results;
   } catch (error) {
-    await connection.rollback();
     throw error;
-  } finally {
-    connection.release();
   }
 };
 
 module.exports = {
-  pool,
   executeQuery,
   executeTransaction,
   testConnection,
-  getConnection: () => pool.getConnection()
+  getConnection: () => Promise.resolve({ release: () => {} })
 };

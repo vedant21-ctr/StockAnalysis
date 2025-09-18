@@ -3,7 +3,6 @@ const router = express.Router();
 const { executeQuery } = require('../config/database');
 const { authenticateToken } = require('../middleware/auth');
 
-// Get dashboard overview
 router.get('/dashboard', async (req, res) => {
   try {
     const queries = {

@@ -6,6 +6,8 @@ import { StockManager } from './js/stock.js';
 import { SalesManager } from './js/sales.js';
 import { AnalyticsManager } from './js/analytics.js';
 import { NotificationManager } from './js/notifications.js';
+import { ThemeManager } from './js/theme.js';
+import { EnhancementManager } from './js/enhancements.js';
 
 class InventoryApp {
     constructor() {
@@ -16,6 +18,8 @@ class InventoryApp {
         this.salesManager = new SalesManager(this.api);
         this.analyticsManager = new AnalyticsManager(this.api);
         this.notifications = new NotificationManager();
+        this.themeManager = new ThemeManager();
+        this.enhancements = new EnhancementManager();
         
         this.currentPage = 'dashboard';
         this.init();

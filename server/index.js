@@ -6,15 +6,11 @@ const path = require('path');
 require('dotenv').config();
 
 const db = require('./config/database');
-const authRoutes = require('./routes/auth');
-const productRoutes = require('./routes/products');
-const stockRoutes = require('./routes/stock');
-const salesRoutes = require('./routes/sales');
-const analyticsRoutes = require('./routes/analytics');
-const supplierRoutes = require('./routes/suppliers');
+// Use mock API for demo
+const mockApiRoutes = require('./routes/mock-api');
 
-// Import background jobs
-require('./jobs/stockAnalysis');
+// Skip background jobs for API-only deployment
+// require('./jobs/stockAnalysis');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -42,13 +38,8 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/stock', stockRoutes);
-app.use('/api/sales', salesRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/suppliers', supplierRoutes);
+// API Routes - Using Mock API
+app.use('/api', mockApiRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

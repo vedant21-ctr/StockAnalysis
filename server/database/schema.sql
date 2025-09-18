@@ -30,7 +30,7 @@ CREATE TABLE suppliers (
     is_active BOOLEAN DEFAULT TRUE
 );
 
--- Categories table for better organization
+
 CREATE TABLE categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Products table
+
 CREATE TABLE products (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(200) NOT NULL,
@@ -47,6 +47,7 @@ CREATE TABLE products (
     category_id INT,
     price DECIMAL(10, 2) NOT NULL,
     cost_price DECIMAL(10, 2),
+    
     stock_quantity INT DEFAULT 0,
     reorder_threshold INT DEFAULT 10,
     max_stock_level INT DEFAULT 1000,
@@ -129,7 +130,6 @@ CREATE TABLE stock_movements (
     INDEX idx_movement_type (movement_type)
 );
 
--- Stock predictions table for ML insights
 CREATE TABLE stock_predictions (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -144,7 +144,6 @@ CREATE TABLE stock_predictions (
     INDEX idx_reorder_date (suggested_reorder_date)
 );
 
--- Notifications table
 CREATE TABLE notifications (
     id INT PRIMARY KEY AUTO_INCREMENT,
     type ENUM('low_stock', 'reorder_suggestion', 'stock_out', 'system') NOT NULL,
