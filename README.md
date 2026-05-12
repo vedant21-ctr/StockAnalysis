@@ -1,88 +1,63 @@
-🏪 Smart Inventory Management System
+# 🏪 SmartStock | Premium Inventory & Business Intelligence
 
-A powerful web app to help businesses easily manage products, track stock, handle sales, and get smart reorder suggestions using predictive analytics.
+A high-performance, modern full-stack web application designed for small-to-medium businesses to manage inventory, track sales, and generate predictive analytics.
 
-✨ What It Does
+---
 
-✅ View real-time inventory and sales data on an interactive dashboard
+### 🚀 Key Features
 
-✅ Add, edit, or delete products and track stock levels
+- **Executive Dashboard**: Real-time KPIs (Revenue, Profit, Margin, Inventory Value).
+- **Inventory Management**: Full CRUD for products with SKU tracking, reorder thresholds, and category classification.
+- **Sales Engine**: Record transactions with automatic stock decrementing and customer tracking.
+- **Business Intelligence**: 
+  - **ABC Analysis**: Automatically categorize products by revenue (80/15/5 rule).
+  - **Sales Forecasting**: Predictive revenue trends based on historical data.
+  - **Supplier Scorecards**: Monitor vendor performance, lead times, and quality ratings.
+- **Security**: JWT-based authentication with role-based access control (Admin/Staff).
 
-✅ Get low stock alerts and smart reorder recommendations
+### 🛠 Tech Stack
 
-✅ Record sales and analyze best-selling products
+- **Frontend**: React (Vite), Tailwind CSS, Lucide Icons, Recharts, Framer Motion.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB (Mongoose).
+- **Auth**: JWT, bcryptjs.
 
-✅ Manage suppliers and purchase orders
+---
 
-✅ Generate simple reports (CSV export)
+### 📦 Quick Setup
 
-✅ Predict when you’ll run out of stock based on sales trends
+#### 1. Setup Environment
+Add a `.env` file in the `server/` directory:
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/stock_analysis
+JWT_SECRET=your_super_secret_key
+NODE_ENV=development
+```
 
-🚀 How It Works
+#### 2. Install Dependencies
+```bash
+npm run install-all
+```
 
-👩‍💻 Frontend:
-Simple, responsive UI built with HTML, CSS, and JavaScript (Chart.js for graphs)
+#### 3. Seed the Database (Demo Ready)
+To populate with initial products, users, and 6 months of sales data:
+```bash
+npm run seed
+```
 
-⚙️ Backend:
-Node.js + Express APIs
-MySQL for storing data
-Background jobs for automated analysis
-
-🐳 Docker Ready:
-Easy to run with docker-compose for consistent environment
-
-📦 Quick Start
-Run Demo (No Database Needed)
-git clone https://github.com/vedant21-ctr/StockAnalysis.git
-cd StockAnalysis
-npm install
-cd client && npm install && npm start
-
-
-Visit: http://localhost:3000 → Click "Enter System"
-
-Full Setup with MySQL
-npm install
-cd client && npm install && cd ..
-
-# Setup database
-mysql -u root -p
-CREATE DATABASE inventory_management;
-# Load schema & seed data:
-mysql -u root -p inventory_management < server/database/schema.sql
-mysql -u root -p inventory_management < server/database/seed.sql
-
-# Configure .env file with your DB details
-cp .env.example .env
-
-# Run server
+#### 4. Run Application
+```bash
 npm run dev
+```
+Visit: `http://localhost:3000`
 
-💡 Why It’s Useful
+---
 
-Perfect for small businesses to:
+### 👤 Demo Credentials
+- **Admin**: `admin@stock.com` / `password123`
+- **Staff**: `staff@stock.com` / `password123`
 
-Keep track of stock in real time
+---
 
-Get smart reorder suggestions automatically
-
-See sales trends and make data-driven decisions
-
-📈 Tech Stack
-
-Frontend: HTML, CSS, JS, Chart.js
-
-Backend: Node.js, Express, MySQL
-
-Containerized with Docker
-
-⭐ Demo Ready
-
-No login, just click "Enter System"
-Works on desktop, tablet, and mobile
-
-📞 Need Help?
-
-Create an issue on GitHub or email support@inventorymanager.com
-
-Built with ❤️ by Vedant Satbhai
+Built with ❤️ by Antigravity (Senior Full-Stack Engineer)

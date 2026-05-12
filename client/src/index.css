@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Premium Design System ─────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Brand Colors */
+    --brand-primary: 217 91% 60%;
+    --brand-accent: 142 71% 45%;
+    --brand-purple: 262 83% 58%;
+    --brand-amber: 38 92% 50%;
+    --brand-rose: 346 87% 60%;
+
+    /* Dark Theme Surfaces */
+    --surface-0: 222 47% 5%;
+    --surface-1: 222 40% 8%;
+    --surface-2: 222 35% 11%;
+    --surface-3: 222 30% 15%;
+    --surface-border: 222 25% 20%;
+
+    /* Glow Colors */
+    --glow-blue: rgba(59, 130, 246, 0.15);
+    --glow-green: rgba(34, 197, 94, 0.15);
+    --glow-purple: rgba(139, 92, 246, 0.15);
+    --glow-amber: rgba(245, 158, 11, 0.15);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#060B18] text-slate-100 font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ─── Component Utilities ────────────────────────────────────────────────────── */
+@layer components {
+  /* Glass morphism card */
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] shadow-2xl;
+  }
+
+  .glass-hover {
+    @apply glass transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.12];
+  }
+
+  /* Premium card */
+  .card {
+    @apply glass rounded-2xl;
+  }
+
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15), 0 0 80px rgba(59, 130, 246, 0.05);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.15), 0 0 80px rgba(34, 197, 94, 0.05);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.15), 0 0 80px rgba(139, 92, 246, 0.05);
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 16px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Animated grid background */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply glass rounded-2xl p-6 relative overflow-hidden transition-all duration-300;
+  }
+
+  .stat-card:hover {
+    @apply bg-white/[0.07];
+    transform: translateY(-2px);
+  }
+
+  /* Input field */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1]
+           text-white placeholder-slate-500 outline-none transition-all duration-200
+           focus:border-blue-500/50 focus:bg-white/[0.08] focus:ring-2 focus:ring-blue-500/10;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-200
+           bg-gradient-to-r from-blue-600 to-blue-500
+           hover:from-blue-500 hover:to-blue-400
+           shadow-lg shadow-blue-500/20
+           active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2.5 rounded-xl font-medium text-slate-400 transition-all duration-200
+           hover:bg-white/[0.06] hover:text-white;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .badge-green {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+  }
+
+  .badge-amber {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+  }
+
+  .badge-red {
+    @apply badge bg-rose-500/15 text-rose-400 border border-rose-500/20;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/20;
+  }
+
+  /* Table */
+  .data-table {
+    @apply w-full text-left;
+  }
+
+  .data-table thead tr {
+    @apply border-b border-white/[0.06];
+  }
+
+  .data-table thead th {
+    @apply px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest;
+  }
+
+  .data-table tbody tr {
+    @apply border-b border-white/[0.04] transition-colors duration-150 hover:bg-white/[0.03];
+  }
+
+  .data-table tbody td {
+    @apply px-6 py-4;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply animate-pulse bg-white/[0.06] rounded-xl;
+  }
+
+  /* Neon text */
+  .text-neon-blue {
+    color: #60a5fa;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+  }
+
+  .text-neon-green {
+    color: #34d399;
+    text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Shimmer */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Spin slow */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  /* Gradient shift */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* Counter animation */
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-count {
+    animation: count-up 0.5s ease-out forwards;
+  }
+
+  /* Scan line */
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .animate-scan {
+    animation: scan 4s linear infinite;
+  }
+
+  /* Blink cursor */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+}
+
+/* ─── Chart Overrides ────────────────────────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(10, 15, 30, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* ─── ECharts Dark Theme ─────────────────────────────────────────────────────── */
+.echarts-container canvas {
+  border-radius: 12px;
+}
+
+/* ─── Modal Backdrop ─────────────────────────────────────────────────────────── */
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+/* ─── Notification Toast Override ───────────────────────────────────────────── */
+.react-hot-toast > div {
+  background: rgba(10, 15, 30, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 12px !important;
+}
